@@ -28,10 +28,23 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
+    //9장 JWT로 로그인/로그아웃 구현하기 위해 사용
+//    @Builder
+//    public User(String email, String password, String auth) {
+//        this.email = email;
+//        this.password = password;
+//    }
+
+
+    @Column(name = "nickname", unique = true)
+    private String nickname;
+
+    //10장 OAuth2로 로그인/로그아웃 구현하기 위해 사용
     @Builder
-    public User(String email, String password, String auth) {
+    public User(String email, String password, String nickname) {
         this.email = email;
         this.password = password;
+        this.nickname = nickname;
     }
 
     //권한 반환
@@ -75,4 +88,9 @@ public class User implements UserDetails {
         return true;
     }
 
+    public User update(String nickname) {
+        this.nickname = nickname;
+
+        return this;
+    }
 }
